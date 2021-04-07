@@ -1,0 +1,4 @@
+*.db
+.waypoint
+waypoint.hcl
+.idea
