@@ -4,6 +4,13 @@ app "server" {
     use "docker" {
       dockerfile = "./build/Dockerfile"
     }
+
+    registry {
+      use "docker" {
+        image = "bjhayes/minikv"
+        tag   = "latest"
+      }
+    }
   }
 
   deploy {

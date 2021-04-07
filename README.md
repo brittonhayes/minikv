@@ -6,10 +6,10 @@
 
 ### 🐋 Docker (Recommended) 
 
-Build the alpine Docker container and start the KV store.
+Fetch the Docker container and start the KV store.
 
 ```shell
-make run
+docker run -d --rm bjhayes/minikv:latest -p 8080:8080
 ```
 
 ### 🇼 Hashicorp Waypoint
