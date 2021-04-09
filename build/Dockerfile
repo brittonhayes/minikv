@@ -1,8 +1,17 @@
-FROM golang:1.16-alpine as build
+FROM golang:1.16-alpine AS build
 WORKDIR /minikv
 COPY . .
-RUN go build -o /bin/minikv ./cmd/server
+ENV CGO_ENABLED=0
+ENV GOOS=linux
+ENV GOARCH=amd64
+RUN go build -ldflags="-w -s" -a -installsuffix cgo -o app ./cmd/server
 
-FROM scratch as runtime
-COPY --from=build /bin/minikv /bin/minikv
+FROM scratch
+COPY --from=build /minikv/app /bin/minikv
+ENV ENVIRONMENT="docker"
+
+VOLUME /data
+
 ENTRYPOINT ["/bin/minikv"]
+
+EXPOSE 8080

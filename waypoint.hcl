@@ -3,6 +3,7 @@ app "server" {
   build {
     use "docker" {
       dockerfile = "./build/Dockerfile"
+      disable_entrypoint = true
     }
 
     registry {

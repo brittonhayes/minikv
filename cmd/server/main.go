@@ -5,11 +5,16 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/asdine/storm"
 	"github.com/brittonhayes/minikv/minikv"
 	"github.com/gorilla/mux"
 )
+
+func init() {
+
+}
 
 func main() {
 	_ = minikv.Start(":8080", map[string]http.HandlerFunc{
@@ -18,13 +23,34 @@ func main() {
 	})
 }
 
+func openDB() (*storm.DB, error) {
+	dbPath := ""
+	if os.Getenv("ENVIRONMENT") == "docker" {
+		dbPath = "/data/"
+	}
+
+	db, err := storm.Open(fmt.Sprintf("%s%s", dbPath, "store.db"))
+	if err != nil {
+		return nil, err
+	}
+
+	return db, nil
+}
+
 func crudHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	db, err := storm.Open("store.db")
+	db, err := openDB()
 	if err != nil {
-		log.Println(err)
-		return
+		log.Fatal(err)
 	}
+
+	defer func(db *storm.DB) {
+		err := db.Close()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+	}(db)
 
 	switch r.Method {
 	case http.MethodGet:
@@ -57,7 +83,7 @@ func crudHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		w.WriteHeader(http.StatusCreated)
-		log.Println(http.StatusCreated, fmt.Sprintf("%q", string(body)))
+		log.Println(http.StatusCreated, "Success")
 	}
 }
 

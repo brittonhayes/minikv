@@ -5,7 +5,7 @@ build:
 	@docker build -f build/Dockerfile -t minikv .
 
 run: build
-	@docker run -d --rm minikv -p 8080:8080
+	docker run --publish 8080:8080 --name minikv --rm minikv
 
 compile:
 	@echo Compiling minikv
