@@ -9,7 +9,7 @@ run: build
 
 compile:
 	@echo Compiling minikv
-	@go build -o bin/minikv ./cmd/server
+	@go build -ldflags="-w -s" -o bin/minikv ./cmd/server
 
 waypoint:
 	@echo Deploying to Waypoint

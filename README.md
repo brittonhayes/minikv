@@ -4,9 +4,13 @@
 
 ## ⚡ Usage 
 
-### 🐋 Docker (Recommended) 
+### 🐋 Docker (Recommended)
 
-Fetch the Docker container and start the KV store.
+**Size**: `6.5 MB` 🔬
+
+Fetch the Docker container and start the KV store. The Docker image is only `~6.5MB` in size.
+Thanks to a scratch container, and some helpful go build tags that remove 
+excess information from the binary.
 
 ```shell
 docker run -d --rm bjhayes/minikv:latest -p 8080:8080
@@ -22,6 +26,8 @@ make waypoint
 ```
 
 ### 🐹 Go 
+
+**Size**: `6.2 MB` 🔬
 
 Compile and run the Go executable
 
