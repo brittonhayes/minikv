@@ -2,3 +2,4 @@
 .waypoint
 waypoint.hcl
 .idea
+waypoint-restore.db.lock

@@ -89,7 +89,7 @@ func postValue(w http.ResponseWriter, r *http.Request) {
 	log.Println(http.StatusCreated, "Success")
 }
 
-// healthCheckHandler checks if the server is alive and okay
+// healthCheckHandler checks if the minikv is alive and okay
 func healthCheckHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)

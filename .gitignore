@@ -4,6 +4,8 @@
 
 .waypoint
 .idea
+*.db
+*.db.lock
 
 ### Go ###
 # Binaries for programs and plugins
