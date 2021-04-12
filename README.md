@@ -43,7 +43,7 @@ make compile
 ## ✨ Try it out
 
 ```shell
-# Ping the server to see if it's up
+# Ping the minikv to see if it's up
 curl http://localhost:8080/status/health
 
 # Add an entry

@@ -26,7 +26,7 @@ func NewRoute(path string, fn http.HandlerFunc, m string) Route {
 	}
 }
 
-// Start begins the http server for the KV store
+// Start begins the http minikv for the KV store
 // and returns an error if anything goes wrong
 func Start(address string, routes []Route) error {
 	ctx, cancel := listenForShutdown()
@@ -64,7 +64,7 @@ func Start(address string, routes []Route) error {
 }
 
 // loggingMiddleware logs each of the http requests
-// received by the http server
+// received by the http minikv
 func loggingMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// Do stuff here
@@ -75,7 +75,7 @@ func loggingMiddleware(next http.Handler) http.Handler {
 }
 
 // listenForShutdown waits for a shutdown signal and cleans
-// up the server gracefully if one is received
+// up the minikv gracefully if one is received
 func listenForShutdown() (context.Context, context.CancelFunc) {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
