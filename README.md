@@ -36,6 +36,13 @@ make waypoint
 Compile and run the Go executable
 
 ```shell
+# Install with go get
+go get github.com/brittonhayes/minikv/cmd/minikv
+minikv
+```
+
+```shell
+# Compile from source
 make compile
 ./bin/minikv
 ```
